@@ -13,11 +13,11 @@ def rewrite_for_client():
     data = request.get_json()
     message = data.get("message", "")
 
-    prompt = (
-        f"Rewrite the following message for a client in a polite, professional, and grammatically correct way. "
-        f"Ensure the tone is soft and appropriate for chat support:\n\n"
-        f"Original Message: \"{message}\"\n\nRewritten:"
-    )
+prompt = (
+    f"Please correct the grammar, punctuation, and spelling of the following sentence. "
+    f"Do not change the tone or add any extra words. Just return the corrected version:\n\n"
+    f"\"{message}\""
+)
 
     response = openai.ChatCompletion.create(
         model="gryphe/mythomax-l2-13b",
