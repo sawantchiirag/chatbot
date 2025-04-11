@@ -1,13 +1,15 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import openai
 
 app = Flask(__name__)
+CORS(app)  # Allow frontend on localhost
 
 openai.api_key = "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"
 openai.api_base = "https://openrouter.ai/api/v1"
 
 @app.route("/rewrite", methods=["POST"])
-def rewrite_message():
+def rewrite_for_client():
     data = request.get_json()
     message = data.get("message", "")
 
@@ -27,3 +29,6 @@ def rewrite_message():
 
     rewritten = response['choices'][0]['message']['content'].strip()
     return jsonify({"rewritten": rewritten})
+
+if __name__ == "__main__":
+    app.run()
